@@ -150,19 +150,19 @@ public class GUI_barang extends javax.swing.JFrame {
     public void cari() {
         try {
             try ( Statement statement = conn.createStatement()) {
-                String sql = "SELECT * FROM barang WHERE `kode`  LIKE '%" + fcari.getText() + "%'";
+                String sql = "SELECT * FROM tb_barang WHERE `kode`  LIKE '%" + fcari.getText() + "%'";
                 ResultSet rs = statement.executeQuery(sql); //menampilkan data dari sql query
                 if (rs.next()) // .next() = scanner method
                 {
-                    kode.setText(kode1);
-                    nama.setText(nama1);
-                    merek.setText(merek1);
-                    harga.setText(harga1);
-                    if (jenis1.equalsIgnoreCase("Makanan")) {
+                    kode.setText(rs.getString(2));
+                    nama.setText(rs.getString(3));
+                    merek.setText(rs.getString(5));
+                    harga.setText(rs.getString(6));
+                    if (rs.getString(4).equalsIgnoreCase("Makanan")) {
                         jComboBox1.setSelectedIndex(0);
-                    } else if (jenis1.equalsIgnoreCase("Minuman")){
+                    } else if (rs.getString(4).equalsIgnoreCase("Minuman")){
                         jComboBox1.setSelectedIndex(1);
-                    }else if (jenis1.equalsIgnoreCase("Grosir")){
+                    }else if (rs.getString(4).equalsIgnoreCase("Grosir")){
                         jComboBox1.setSelectedIndex(2);
                     }else{
                         jComboBox1.setSelectedIndex(3);
